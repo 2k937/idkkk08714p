@@ -1,426 +1,569 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>idkkk08714p — Discord Bot Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>idkkk08714p</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#080808;--bg1:#0e0e0e;--bg2:#141414;--border:#1e1e1e;--border2:#2a2a2a;--text:#e0e0e0;--muted:#555;--dim:#2a2a2a;--accent:#fff}
-    body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh}
-    body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.01) 3px,rgba(255,255,255,.01) 4px);pointer-events:none;z-index:0}
-    .wrap{position:relative;z-index:1}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* NAV */
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:1px solid var(--border);background:rgba(8,8,8,.97);position:sticky;top:0;z-index:100}
-    .nav-logo{font-family:'Share Tech Mono',monospace;font-size:13px;color:#fff;letter-spacing:2px}
-    .nav-logo em{color:var(--muted);font-style:normal}
-    .nav-online{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-family:'Share Tech Mono',monospace}
-    .dot-live{width:6px;height:6px;border-radius:50%;background:#5dff8a;animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 5px #5dff8a44}50%{opacity:.4;box-shadow:none}}
-    .tabs{display:flex;gap:2px}
-    .tab{padding:7px 16px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:transparent;border:1px solid var(--border2);color:var(--muted);cursor:pointer;border-radius:2px;transition:all .2s;font-family:'Rajdhani',sans-serif}
-    .tab:hover{border-color:#444;color:#ccc}
-    .tab.active{background:#fff;color:#080808;border-color:#fff}
+```
+:root {
+  --bg: #000;
+  --surface: #0a0a0a;
+  --border: #1a1a1a;
+  --border-hover: #2a2a2a;
+  --text: #444;
+  --muted: #222;
+  --hi: #999;
+  --white: #ddd;
+  --green: #3a3a3a;
+}
 
-    /* SECTIONS */
-    .sec{display:none;animation:fadeUp .3s ease}
-    .sec.active{display:block}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+html { scroll-behavior: smooth; background: #000; }
 
-    /* HOME */
-    .hero{padding:52px 28px 40px;max-width:860px;margin:0 auto}
-    .hero-eyebrow{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-    .hero-eyebrow::after{content:'';flex:1;height:1px;background:var(--border)}
-    .hero-name{font-size:clamp(46px,9vw,80px);font-weight:700;color:#fff;line-height:.92;letter-spacing:-2px;margin-bottom:20px}
-    .hero-name .fade{color:var(--dim)}
-    .typing-wrap{font-family:'Share Tech Mono',monospace;font-size:14px;color:#888;display:flex;align-items:center;gap:8px;margin-bottom:44px;min-height:22px}
-    .caret{width:2px;height:15px;background:#fff;display:inline-block;animation:blink 1s step-end infinite}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-    .stats-row{display:flex;gap:0;margin-bottom:44px;border:1px solid var(--border);border-radius:4px;overflow:hidden}
-    .stat-item{flex:1;padding:20px 24px;border-right:1px solid var(--border);position:relative}
-    .stat-item:last-child{border-right:none}
-    .stat-item::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.025) 0%,transparent 60%);pointer-events:none}
-    .stat-n{font-size:28px;font-weight:700;color:#fff;font-family:'Share Tech Mono',monospace;line-height:1}
-    .stat-l{font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:5px}
-    .hero-ctas{display:flex;gap:10px;flex-wrap:wrap}
-    .btn-primary{padding:10px 24px;background:#fff;color:#080808;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all .15s}
-    .btn-primary:hover{background:#ddd;transform:translateY(-1px)}
-    .btn-outline{padding:10px 24px;background:transparent;color:#777;border:1px solid var(--border2);border-radius:2px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all .15s}
-    .btn-outline:hover{border-color:#555;color:#ccc}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-    /* INNER */
-    .inner{padding:40px 28px;max-width:860px;margin:0 auto}
-    .sec-label{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:10px}
-    .sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
-    .sec-head{font-size:30px;font-weight:700;color:#fff;margin-bottom:6px}
-    .sec-sub{font-size:14px;color:var(--muted);margin-bottom:32px}
+.wrap { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 0 28px; }
 
-    /* ABOUT */
-    .about-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .card{background:var(--bg1);border:1px solid var(--border);border-radius:4px;padding:22px;transition:border-color .2s}
-    .card:hover{border-color:var(--border2)}
-    .card-label{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
-    .card p{font-size:14px;color:#bbb;line-height:1.75}
-    .card p strong{color:#fff}
-    .server-pill{display:inline-flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border2);border-radius:3px;padding:10px 14px;margin-top:14px;font-family:'Share Tech Mono',monospace;font-size:12px;color:#aaa}
-    .roles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-    .role-pill{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:3px;font-size:13px;color:#bbb;transition:border-color .2s}
-    .role-pill:hover{border-color:#333}
-    .role-ico{width:30px;height:30px;border-radius:50%;background:var(--bg);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .skill-wrap{display:flex;flex-wrap:wrap;gap:7px}
-    .skill{padding:5px 11px;border:1px solid var(--border2);border-radius:2px;font-size:11px;color:#666;font-family:'Share Tech Mono',monospace;background:var(--bg);transition:all .2s}
-    .skill:hover{border-color:#444;color:#bbb}
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(14px);
+}
+.nav-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: #666;
+  letter-spacing: 0.5px;
+}
+.nav-logo span { color: #333; }
+.nav-links { display: flex; gap: 24px; }
+.nav-links a {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--hi); }
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+.pulse {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #333;
+  border: 1px solid #555;
+}
 
-    /* BOTS */
-    .bots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-    .bot-card{background:var(--bg1);border:1px solid var(--border);border-radius:4px;padding:22px;transition:all .25s;position:relative;overflow:hidden}
-    .bot-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(255,255,255,.08);transform:scaleX(0);transition:transform .35s;transform-origin:left}
-    .bot-card:hover{border-color:#2e2e2e;transform:translateY(-2px)}
-    .bot-card:hover::after{transform:scaleX(1)}
-    .bot-ico{width:36px;height:36px;margin-bottom:14px;color:#888}
-    .bot-name{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px}
-    .bot-desc{font-size:13px;color:#666;line-height:1.6}
-    .bot-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}
-    .chip{font-size:10px;background:var(--bg2);border:1px solid var(--border);padding:3px 8px;border-radius:2px;color:#555;font-family:'Share Tech Mono',monospace}
-    .bot-empty{border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:160px;cursor:pointer}
-    .bot-empty:hover{border-color:#333}
+/* ── HERO ── */
+.hero {
+  padding: 80px 0 64px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: rise .7s ease forwards;
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
 
-    /* BUY */
-    .buy-wrap{max-width:460px;margin:0 auto}
-    .product-box{background:var(--bg1);border:1px solid var(--border2);border-radius:6px;overflow:hidden}
-    .product-top{padding:26px 26px 22px;border-bottom:1px solid var(--border)}
-    .product-top-row{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-    .product-ico{width:50px;height:50px;background:var(--bg2);border:1px solid var(--border2);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .product-t{font-size:18px;font-weight:700;color:#fff}
-    .product-s{font-size:12px;color:var(--muted);margin-top:2px;font-family:'Share Tech Mono',monospace}
-    .feat-list{list-style:none}
-    .feat-list li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #111;font-size:13px;color:#999}
-    .feat-list li:last-child{border:none}
-    .feat-ico{flex-shrink:0;color:#666}
-    .product-bot{padding:22px 26px}
-    .price-area{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:18px;text-align:center;margin-bottom:16px}
-    .price-tag-label{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-family:'Share Tech Mono',monospace}
-    .price-row{display:flex;align-items:baseline;justify-content:center;gap:10px;margin:6px 0 2px}
-    .price-big{font-size:36px;font-weight:700;color:#fff;font-family:'Share Tech Mono',monospace}
-    .price-currency{font-size:14px;color:var(--muted);font-family:'Share Tech Mono',monospace}
-    .price-small{font-size:11px;color:var(--muted)}
-    .buy-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#fff;color:#080808;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;text-decoration:none;font-family:'Rajdhani',sans-serif;transition:all .15s}
-    .buy-btn:hover{background:#e8e8e8;transform:translateY(-1px)}
-    .buy-trust{display:flex;justify-content:center;gap:18px;margin-top:14px}
-    .trust-item{font-size:11px;color:#333;font-family:'Share Tech Mono',monospace;display:flex;align-items:center;gap:5px}
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-tag::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--border-hover);
+}
+.hero-name {
+  font-size: clamp(44px, 9vw, 76px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 0.9;
+  letter-spacing: -3px;
+  margin-bottom: 8px;
+}
+.hero-name .dim { color: #222; }
+.typing-line {
+  font-family: 'DM Mono', monospace;
+  font-size: 15px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  margin: 22px 0 44px;
+  min-height: 24px;
+}
+.typing-line::before { content: '> '; color: #333; margin-right: 8px; }
+.caret {
+  display: inline-block;
+  width: 2px; height: 16px;
+  background: var(--hi);
+  margin-left: 3px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    @media(max-width:600px){
-      .about-cols,.roles-grid{grid-template-columns:1fr}
-      .stats-row{flex-wrap:wrap}
-      .stat-item{flex:1 1 45%;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
-      .stat-item:last-child{border-bottom:none}
-      .nav{padding:12px 14px}
-      .hero{padding:36px 16px 28px}
-      .inner{padding:28px 16px}
-    }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .2s;
+  font-family: 'Syne', sans-serif;
+  border: none;
+}
+.btn-fill { background: #fff; color: #000; }
+.btn-fill:hover { background: #ccc; }
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-hover);
+}
+.btn-ghost:hover { color: var(--hi); border-color: #444; }
+
+/* ── SECTION ── */
+section { padding: 60px 0; border-top: 1px solid var(--border); }
+.sec-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.sec-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.sec-sub {
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 36px;
+}
+
+/* ── DISCORD CARD ── */
+.discord-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.dc-banner {
+  height: 80px;
+  background: #111;
+  position: relative;
+  overflow: hidden;
+}
+.dc-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #111 0%, #0a0a0a 100%);
+}
+.dc-body { padding: 0 18px 18px; }
+.dc-avatar-wrap { position: relative; display: inline-block; margin-top: -26px; margin-bottom: 10px; }
+.dc-avatar { width: 56px; height: 56px; border-radius: 50%; border: 3px solid var(--bg); display: block; object-fit: cover; filter: grayscale(0.3); }
+.dc-avatar-online { width: 12px; height: 12px; background: #555; border-radius: 50%; border: 2px solid var(--bg); position: absolute; bottom: 2px; right: 2px; }
+.dc-name { font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 3px; }
+.dc-desc { font-size: 12px; color: var(--text); margin-bottom: 12px; line-height: 1.5; }
+.dc-meta { display: flex; gap: 16px; margin-bottom: 14px; }
+.dc-meta-item { display: flex; align-items: center; gap: 6px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text); }
+.dc-meta-item strong { color: var(--hi); font-weight: 500; }
+.dot-members { width: 7px; height: 7px; border-radius: 50%; background: #444; }
+.dot-total { width: 7px; height: 7px; border-radius: 50%; background: #333; }
+.dc-invite {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; background: #fff; color: #000;
+  border-radius: 2px; font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+  transition: background .2s; font-family: 'Syne', sans-serif;
+}
+.dc-invite:hover { background: #ccc; }
+
+/* ── ROLES ── */
+.roles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 28px; }
+.role-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 4px;
+  font-size: 12px; color: var(--text); transition: border-color .2s;
+}
+.role-card:hover { border-color: var(--border-hover); color: var(--hi); }
+.role-icon { width: 28px; height: 28px; background: #111; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #444; }
+
+/* ── SKILLS ── */
+.skills-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+.skill-tag {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  padding: 4px 10px; border: 1px solid var(--border);
+  border-radius: 2px; color: var(--text); background: transparent; transition: all .2s;
+}
+.skill-tag:hover { border-color: var(--border-hover); color: var(--hi); }
+
+/* ── BOTS ── */
+.bots-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.bot-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; padding: 18px; transition: all .2s;
+}
+.bot-card:hover { border-color: var(--border-hover); }
+.bot-icon { font-size: 20px; margin-bottom: 10px; filter: grayscale(1); }
+.bot-name { font-size: 13px; font-weight: 700; color: var(--hi); margin-bottom: 5px; }
+.bot-desc { font-size: 12px; color: var(--text); line-height: 1.6; }
+.bot-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
+.bot-tag { font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 7px; background: #111; border: 1px solid var(--border); border-radius: 2px; color: var(--text); }
+
+/* ── BUY ── */
+.buy-box { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; max-width: 440px; }
+.buy-top { padding: 22px; border-bottom: 1px solid var(--border); }
+.buy-title { font-size: 17px; font-weight: 800; color: var(--white); margin-bottom: 3px; }
+.buy-sub { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text); margin-bottom: 18px; }
+.feat-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.feat-item { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--text); }
+.feat-check { color: var(--hi); flex-shrink: 0; }
+.buy-bot { padding: 22px; }
+.price-block { background: #0d0d0d; border: 1px solid var(--border); border-radius: 4px; padding: 18px; text-align: center; margin-bottom: 14px; }
+.price-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.price-amount { font-family: 'DM Mono', monospace; font-size: 38px; font-weight: 500; color: var(--white); line-height: 1; }
+.price-unit { font-size: 12px; color: var(--text); margin-top: 4px; }
+.trust-row { display: flex; justify-content: center; gap: 18px; margin-top: 12px; }
+.trust-item { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid var(--border); padding: 28px 0; text-align: center; }
+footer p { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+.fade-in { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+@media (max-width: 560px) {
+  .roles-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 14px; }
+  .hero { padding: 52px 0 44px; }
+}
+```
+
   </style>
 </head>
 <body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">idkkk<span>08714p</span></div>
+    <div class="nav-links">
+      <a href="#about" class="active">About</a>
+      <a href="#bots">Bots</a>
+      <a href="#buy">Buy</a>
+    </div>
+    <div class="nav-status">
+      <div class="pulse"></div>
+      <span id="local-time">--:-- --</span>
+    </div>
+  </div>
+</nav>
+
 <div class="wrap">
 
-  <nav class="nav">
-    <div style="display:flex;align-items:center;gap:14px">
-      <div class="nav-logo">idkkk<em>08714p</em></div>
-      <div class="nav-online"><div class="dot-live"></div>online</div>
-    </div>
-    <div class="tabs">
-      <button class="tab active" onclick="go('home')">Home</button>
-      <button class="tab" onclick="go('about')">About</button>
-      <button class="tab" onclick="go('bots')">Bots</button>
-      <button class="tab" onclick="go('buy')">Buy</button>
-    </div>
-  </nav>
+  <!-- HERO -->
 
-  <!-- HOME -->
-  <div id="s-home" class="sec active">
-    <div class="hero">
-      <div class="hero-eyebrow">discord bot developer</div>
-      <div class="hero-name">idkkk<span class="fade">08714p</span></div>
-      <div class="typing-wrap"><span id="typed"></span><span class="caret"></span></div>
-      <div class="stats-row">
-        <div class="stat-item"><div class="stat-n" id="c1">0</div><div class="stat-l">Server members</div></div>
-        <div class="stat-item"><div class="stat-n">24/7</div><div class="stat-l">Uptime</div></div>
-        <div class="stat-item"><div class="stat-n">5+</div><div class="stat-l">Roles held</div></div>
-        <div class="stat-item"><div class="stat-n">∞</div><div class="stat-l">Bots built</div></div>
-      </div>
-      <div class="hero-ctas">
-        <button class="btn-primary" onclick="go('buy')">Buy a Bot</button>
-        <button class="btn-outline" onclick="go('bots')">View Portfolio</button>
-      </div>
+  <div class="hero">
+    <div class="hero-tag">Web Developer + Bot Developer · USA</div>
+    <div class="hero-name">idkkk<span class="dim">08714p</span></div>
+    <div class="typing-line">
+      <span id="typed"></span><span class="caret"></span>
+    </div>
+    <div class="hero-ctas">
+      <a href="#buy" class="btn btn-ghost">Buy a Bot →</a>
     </div>
   </div>
 
   <!-- ABOUT -->
-  <div id="s-about" class="sec">
-    <div class="inner">
-      <div class="sec-label">profile</div>
-      <div class="sec-head">About me</div>
-      <div class="sec-sub">Developer. Manager. Owner. I do it all.</div>
-      <div class="about-cols">
-        <div class="card" style="grid-column:span 2">
-          <div class="card-label">// intro</div>
-          <p>I'm <strong>idkkk08714p</strong> — a Discord bot developer with real experience running large-scale communities. I currently work in a server with over <strong>1 million members</strong>, holding multiple high-level roles across management, moderation, and ownership.</p>
-          <div class="server-pill">
-            <div class="dot-live"></div>
-            Active — 1,000,000+ member server
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-label">// roles &amp; experience</div>
-          <div class="roles-grid">
-            <div class="role-pill">
-              <div class="role-ico">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 2l1.5 3 3.5.5-2.5 2.5.6 3.5L8 10l-3.1 1.5.6-3.5L3 5.5l3.5-.5z"/>
-                </svg>
-              </div>Ownership
-            </div>
-            <div class="role-pill">
-              <div class="role-ico">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/>
-                  <rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/>
-                </svg>
-              </div>Management
-            </div>
-            <div class="role-pill">
-              <div class="role-ico">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 2C5.2 2 3 4.2 3 7c0 1.8.9 3.4 2.3 4.3L5 14h6l-.3-2.7C12.1 10.4 13 8.8 13 7c0-2.8-2.2-5-5-5z"/>
-                </svg>
-              </div>Moderation
-            </div>
-            <div class="role-pill">
-              <div class="role-ico">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="8" cy="5" r="2.5"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5"/>
-                </svg>
-              </div>Administration
-            </div>
-            <div class="role-pill">
-              <div class="role-ico">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 2v4M8 10v4M2 8h4M10 8h4"/>
-                  <circle cx="8" cy="8" r="2"/>
-                </svg>
-              </div>Bot Dev
-            </div>
-            <div class="role-pill">
-              <div class="role-ico">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 4h12M2 8h8M2 12h5"/>
-                </svg>
-              </div>Staff Lead
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-label">// tech stack</div>
-          <div class="skill-wrap">
-            <span class="skill">discord.js</span><span class="skill">Node.js</span>
-            <span class="skill">Python</span><span class="skill">discord.py</span>
-            <span class="skill">MongoDB</span><span class="skill">Slash Cmds</span>
-            <span class="skill">REST APIs</span><span class="skill">Webhooks</span>
-            <span class="skill">Auto-mod</span><span class="skill">Embeds</span>
-          </div>
-        </div>
+
+  <section id="about" class="fade-in">
+    <div class="sec-eyebrow">// profile</div>
+    <div class="sec-title">About me</div>
+    <div class="sec-sub">Web dev + bot dev. I build for the web and for Discord.</div>
+
+```
+<!-- Discord Server Card -->
+<div class="discord-card">
+  <div class="dc-banner"></div>
+  <div class="dc-body">
+    <div class="dc-avatar-wrap">
+      <div class="dc-avatar" style="background:#111;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:#333;border-radius:50%;">N</div>
+      <div class="dc-avatar-online"></div>
+    </div>
+    <div class="dc-name">Node</div>
+    <div class="dc-desc">Node — a Discord server where I work as the web developer. 91 members.</div>
+    <div class="dc-meta">
+      <div class="dc-meta-item">
+        <div class="dot-members"></div>
+        <strong>online</strong>
+      </div>
+      <div class="dc-meta-item">
+        <div class="dot-total"></div>
+        <strong>91</strong>&nbsp;members
       </div>
     </div>
+    <a class="dc-invite" href="https://discord.gg/F57YEF3z7F" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="#000"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15zM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69z"/></svg>
+      Join — discord.gg/F57YEF3z7F
+    </a>
   </div>
+</div>
+
+<!-- Roles -->
+<div class="roles-grid">
+  <div class="role-card">
+    <div class="role-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="5 3 1 8 5 13"/><polyline points="11 3 15 8 11 13"/></svg>
+    </div>
+    Web Developer
+  </div>
+  <div class="role-card">
+    <div class="role-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2v4M8 10v4M2 8h4M10 8h4"/><circle cx="8" cy="8" r="2"/></svg>
+    </div>
+    Bot Developer
+  </div>
+  <div class="role-card">
+    <div class="role-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>
+    </div>
+    Management
+  </div>
+  <div class="role-card">
+    <div class="role-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="5" r="2.5"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5"/></svg>
+    </div>
+    Administration
+  </div>
+  <div class="role-card">
+    <div class="role-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h12M2 8h8M2 12h5"/></svg>
+    </div>
+    Staff Lead
+  </div>
+  <div class="role-card">
+    <div class="role-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M5 7h6M5 10h4"/></svg>
+    </div>
+    UI Design
+  </div>
+</div>
+
+<!-- Stack -->
+<div class="skills-wrap">
+  <span class="skill-tag">HTML</span>
+  <span class="skill-tag">CSS</span>
+  <span class="skill-tag">JavaScript</span>
+  <span class="skill-tag">Node.js</span>
+  <span class="skill-tag">discord.js</span>
+  <span class="skill-tag">Python</span>
+  <span class="skill-tag">discord.py</span>
+  <span class="skill-tag">MongoDB</span>
+  <span class="skill-tag">REST APIs</span>
+  <span class="skill-tag">Slash Commands</span>
+  <span class="skill-tag">Webhooks</span>
+  <span class="skill-tag">Auto-mod</span>
+</div>
+```
+
+  </section>
 
   <!-- BOTS -->
-  <div id="s-bots" class="sec">
-    <div class="inner">
-      <div class="sec-label">portfolio</div>
-      <div class="sec-head">Bots I've built</div>
-      <div class="sec-sub">Custom bots used in real communities — including my own 1M+ server.</div>
-      <div class="bots-grid">
 
-        <div class="bot-card">
-          <svg class="bot-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 4C11.4 4 6 9.4 6 16c0 3.6 1.5 6.8 3.9 9.1L9 32h18l-.9-6.9C28.5 22.8 30 19.6 30 16c0-6.6-5.4-12-12-12z"/>
-            <circle cx="13" cy="17" r="1.5" fill="currentColor" stroke="none"/>
-            <circle cx="23" cy="17" r="1.5" fill="currentColor" stroke="none"/>
-            <path d="M14 22c1 1.5 7 1.5 8 0"/>
-          </svg>
-          <div class="bot-name">Guardian</div>
-          <div class="bot-desc">Full mod suite — auto-mod, logging, anti-raid, warn systems for large servers.</div>
-          <div class="bot-chips"><span class="chip">moderation</span><span class="chip">logging</span><span class="chip">anti-raid</span></div>
-        </div>
-
-        <div class="bot-card">
-          <svg class="bot-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="18" cy="18" r="12"/>
-            <path d="M18 10v2M18 24v2M14 14l1.5 1.5M20.5 20.5L22 22M10 18h2M24 18h2M14 22l1.5-1.5M20.5 15.5L22 14"/>
-            <circle cx="18" cy="18" r="4"/>
-          </svg>
-          <div class="bot-name">EcoBot</div>
-          <div class="bot-desc">Server economy with currency, shop, daily rewards, rob system, and leaderboards.</div>
-          <div class="bot-chips"><span class="chip">economy</span><span class="chip">gamification</span></div>
-        </div>
-
-        <div class="bot-card">
-          <svg class="bot-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 4l3.5 7 7.5 1-5.5 5.5 1.3 7.5L18 22l-6.8 3 1.3-7.5L7 12l7.5-1z"/>
-          </svg>
-          <div class="bot-name">LevelUp</div>
-          <div class="bot-desc">XP leveling with custom rank cards, role rewards, and voice XP support.</div>
-          <div class="bot-chips"><span class="chip">leveling</span><span class="chip">roles</span></div>
-        </div>
-
-        <div class="bot-card">
-          <svg class="bot-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="6" y="6" width="24" height="24" rx="2"/>
-            <path d="M6 13h24M13 6v27"/>
-            <path d="M17 20h10M17 25h7"/>
-          </svg>
-          <div class="bot-name">StaffBot</div>
-          <div class="bot-desc">Staff management, ticket systems, application handling, and shift tracking.</div>
-          <div class="bot-chips"><span class="chip">management</span><span class="chip">tickets</span></div>
-        </div>
-
-        <div class="bot-card">
-          <svg class="bot-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="10" width="26" height="18" rx="2"/>
-            <path d="M13 10V8a2 2 0 012-2h6a2 2 0 012 2v2"/>
-            <circle cx="18" cy="19" r="4"/>
-            <path d="M15.5 19l1.5 1.5L20 17"/>
-          </svg>
-          <div class="bot-name">ArcadeBot</div>
-          <div class="bot-desc">Mini games, trivia, tournaments, and interactive events to keep members engaged.</div>
-          <div class="bot-chips"><span class="chip">games</span><span class="chip">events</span></div>
-        </div>
-
-        <div class="bot-card bot-empty" onclick="go('buy')">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#2e2e2e" stroke-width="1.4" stroke-linecap="round">
-            <line x1="14" y1="5" x2="14" y2="23"/><line x1="5" y1="14" x2="23" y2="14"/>
-          </svg>
-          <div class="bot-name" style="color:#2e2e2e;margin-top:10px">Your bot here</div>
-          <div class="bot-desc" style="color:#252525;font-size:12px;margin-top:4px">Built to your exact specs</div>
-          <div style="margin-top:14px;font-size:11px;color:#2a2a2a;font-family:'Share Tech Mono',monospace">click to order →</div>
-        </div>
-
+  <section id="bots" class="fade-in">
+    <div class="sec-eyebrow">// portfolio</div>
+    <div class="sec-title">Bots I've built</div>
+    <div class="sec-sub">Custom bots deployed in real servers — tested, maintained, battle-hardened.</div>
+    <div class="bots-grid">
+      <div class="bot-card">
+        <div class="bot-icon">🛡️</div>
+        <div class="bot-name">Guardian</div>
+        <div class="bot-desc">Full mod suite — auto-mod, logging, anti-raid, warn systems for large servers.</div>
+        <div class="bot-tags"><span class="bot-tag">moderation</span><span class="bot-tag">anti-raid</span></div>
+      </div>
+      <div class="bot-card">
+        <div class="bot-icon">💰</div>
+        <div class="bot-name">EcoBot</div>
+        <div class="bot-desc">Economy system with currency, shop, daily rewards, rob, and leaderboards.</div>
+        <div class="bot-tags"><span class="bot-tag">economy</span><span class="bot-tag">gamification</span></div>
+      </div>
+      <div class="bot-card">
+        <div class="bot-icon">⭐</div>
+        <div class="bot-name">LevelUp</div>
+        <div class="bot-desc">XP leveling with custom rank cards, role rewards, and voice XP support.</div>
+        <div class="bot-tags"><span class="bot-tag">leveling</span><span class="bot-tag">roles</span></div>
+      </div>
+      <div class="bot-card">
+        <div class="bot-icon">📋</div>
+        <div class="bot-name">StaffBot</div>
+        <div class="bot-desc">Staff management, ticket systems, applications, and shift tracking.</div>
+        <div class="bot-tags"><span class="bot-tag">management</span><span class="bot-tag">tickets</span></div>
+      </div>
+      <div class="bot-card">
+        <div class="bot-icon">🎮</div>
+        <div class="bot-name">ArcadeBot</div>
+        <div class="bot-desc">Mini games, trivia, tournaments, and events to keep your members engaged.</div>
+        <div class="bot-tags"><span class="bot-tag">games</span><span class="bot-tag">events</span></div>
+      </div>
+      <div class="bot-card" style="border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;min-height:160px;" onclick="document.getElementById('buy').scrollIntoView({behavior:'smooth'})">
+        <div style="font-size:24px;margin-bottom:10px;opacity:.3">+</div>
+        <div class="bot-name" style="color:var(--muted)">Your bot</div>
+        <div class="bot-desc" style="font-size:11px;margin-top:4px">Built to your exact specs →</div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- BUY -->
-  <div id="s-buy" class="sec">
-    <div class="inner">
-      <div class="sec-label">order</div>
-      <div class="sec-head">Buy a Discord bot</div>
-      <div class="sec-sub">Custom-built to your specs. Paid with Robux.</div>
-      <div class="buy-wrap">
-        <div class="product-box">
-          <div class="product-top">
-            <div class="product-top-row">
-              <div class="product-ico">
-                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="4" y="8" width="18" height="13" rx="2"/>
-                  <path d="M9 8V6a4 4 0 018 0v2"/>
-                  <circle cx="13" cy="14" r="2"/>
-                  <path d="M13 16v2"/>
-                </svg>
-              </div>
-              <div>
-                <div class="product-t">Custom Discord Bot</div>
-                <div class="product-s">by idkkk08714p</div>
-              </div>
-            </div>
-            <ul class="feat-list">
-              <li>
-                <svg class="feat-ico" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
-                Fully custom commands &amp; features
-              </li>
-              <li>
-                <svg class="feat-ico" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
-                Moderation, economy, leveling — anything you need
-              </li>
-              <li>
-                <svg class="feat-ico" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
-                Source code included
-              </li>
-              <li>
-                <svg class="feat-ico" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
-                Setup &amp; deployment assistance
-              </li>
-              <li>
-                <svg class="feat-ico" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
-                Built by a dev with ownership, management &amp; mod experience
-              </li>
-              <li>
-                <svg class="feat-ico" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
-                Revisions until you're satisfied
-              </li>
-            </ul>
-          </div>
-          <div class="product-bot">
-            <div class="price-area">
-              <div class="price-tag-label">price</div>
-              <div class="price-row">
-                <div class="price-big">1,000</div>
-                <div class="price-currency">Robux</div>
-              </div>
-              <div class="price-small">one-time payment via Roblox Game Pass</div>
-            </div>
-            <a class="buy-btn" href="https://www.roblox.com/game-pass/1748718326/Bot" target="_blank">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-              Purchase on Roblox
-            </a>
-            <div class="buy-trust">
-              <div class="trust-item">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#444" stroke-width="1.4" stroke-linecap="round"><path d="M2 6l2.5 2.5L10 3"/></svg>
-                real experience
-              </div>
-              <div class="trust-item">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#444" stroke-width="1.4" stroke-linecap="round"><path d="M2 6l2.5 2.5L10 3"/></svg>
-                1M+ server
-              </div>
-              <div class="trust-item">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#444" stroke-width="1.4" stroke-linecap="round"><path d="M2 6l2.5 2.5L10 3"/></svg>
-                fast delivery
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+  <section id="buy" class="fade-in">
+    <div class="sec-eyebrow">// order</div>
+    <div class="sec-title">Buy a bot</div>
+    <div class="sec-sub">Custom-built Discord bots. Paid with Robux.</div>
+
+```
+<div class="buy-box">
+  <div class="buy-top">
+    <div class="buy-title">Custom Discord Bot</div>
+    <div class="buy-sub">by idkkk08714p</div>
+    <ul class="feat-list">
+      <li class="feat-item"><span class="feat-check">✓</span> Fully custom commands & features</li>
+      <li class="feat-item"><span class="feat-check">✓</span> Moderation, economy, leveling — anything you need</li>
+      <li class="feat-item"><span class="feat-check">✓</span> Source code included</li>
+      <li class="feat-item"><span class="feat-check">✓</span> Setup & deployment help</li>
+      <li class="feat-item"><span class="feat-check">✓</span> Built by a real owner & manager</li>
+      <li class="feat-item"><span class="feat-check">✓</span> Revisions until you're satisfied</li>
+    </ul>
+  </div>
+  <div class="buy-bot">
+    <div class="price-block">
+      <div class="price-label">one-time</div>
+      <div class="price-amount">1,000</div>
+      <div class="price-unit">Robux · via Roblox Game Pass</div>
+    </div>
+    <a class="btn btn-fill" style="width:100%;justify-content:center;" href="https://www.roblox.com/game-pass/1748718326/Bot" target="_blank">
+      Purchase on Roblox →
+    </a>
+    <div class="trust-row">
+      <div class="trust-item">✓ real experience</div>
+      <div class="trust-item">✓ web + bot dev</div>
+      <div class="trust-item">✓ fast delivery</div>
     </div>
   </div>
+</div>
+```
+
+  </section>
+
+  <footer>
+    <p>idkkk08714p · CST · USA · built with 🤍</p>
+  </footer>
 
 </div>
 
 <script>
-  function go(name){
-    document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    document.getElementById('s-'+name).classList.add('active');
-    const map={home:0,about:1,bots:2,buy:3};
-    document.querySelectorAll('.tab')[map[name]].classList.add('active');
+  // Typing animation
+  // Live Omaha local time
+  function updateTime() {
+    const timeStr = new Date().toLocaleTimeString('en-US', {
+      timeZone: 'America/Chicago',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+    document.getElementById('local-time').textContent = timeStr + ' CST';
   }
-  const phrases=['Bot Developer','Server Owner','Moderation Lead','Management Staff','Building bots since day one','idkkk08714p'];
-  let pi=0,ci=0,del=false;
-  const el=document.getElementById('typed');
-  function type(){
-    const w=phrases[pi];
-    if(!del){el.textContent=w.slice(0,++ci);if(ci===w.length){del=true;setTimeout(type,1800);return;}setTimeout(type,60);}
-    else{el.textContent=w.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;setTimeout(type,300);return;}setTimeout(type,32);}
+  updateTime();
+  setInterval(updateTime, 1000);
+
+  const phrases = [
+    'Web Developer',
+    'Bot Developer',
+    'Server Owner',
+    'Moderation Lead',
+    'Management Staff',
+    'Building since day one',
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typed');
+  function type() {
+    const word = phrases[pi];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, 2000); return; }
+      setTimeout(type, 58);
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(type, 280); return; }
+      setTimeout(type, 30);
+    }
   }
   type();
-  function countUp(id,target,suffix,dur){
-    const el=document.getElementById(id);let start=0,step=target/60;
-    const t=setInterval(()=>{start+=step;if(start>=target){el.textContent='1M'+suffix;clearInterval(t);}
-    else{let v=Math.floor(start);el.textContent=(v>=1000000?(v/1000000).toFixed(1)+'M':v)+suffix;}},dur/60);
-  }
-  setTimeout(()=>countUp('c1',1000000,'+',1800),400);
+
+  // Scroll fade-in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // Nav active link highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
 </script>
+
 </body>
 </html>
