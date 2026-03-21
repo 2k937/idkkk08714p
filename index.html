@@ -11,18 +11,18 @@
 
 ```
 :root {
-  --bg: #111;
-  --surface: #1a1a1a;
-  --border: #2a2a2a;
-  --border-hover: #3a3a3a;
-  --text: #ccc;
-  --muted: #666;
-  --hi: #e8e8e8;
-  --white: #fff;
-  --green: #555;
+  --bg: #1c1c1c;
+  --surface: #252525;
+  --border: #333;
+  --border-hover: #444;
+  --text: #d0d0d0;
+  --muted: #888;
+  --hi: #f0f0f0;
+  --white: #ffffff;
+  --green: #666;
 }
 
-html { scroll-behavior: smooth; background: #111; }
+html { scroll-behavior: smooth; background: #1c1c1c; }
 
 body {
   background: var(--bg);
@@ -40,7 +40,7 @@ nav {
   top: 0;
   z-index: 100;
   border-bottom: 1px solid var(--border);
-  background: rgba(17,17,17,0.95);
+  background: rgba(28,28,28,0.97);
   backdrop-filter: blur(14px);
 }
 .nav-inner {
@@ -117,7 +117,7 @@ nav {
   letter-spacing: -3px;
   margin-bottom: 8px;
 }
-.hero-name .dim { color: #222; }
+.hero-name .dim { color: #555; }
 .typing-line {
   font-family: 'DM Mono', monospace;
   font-size: 15px;
@@ -127,7 +127,7 @@ nav {
   margin: 22px 0 44px;
   min-height: 24px;
 }
-.typing-line::before { content: '> '; color: #333; margin-right: 8px; }
+.typing-line::before { content: '> '; color: #888; margin-right: 8px; }
 .caret {
   display: inline-block;
   width: 2px; height: 16px;
