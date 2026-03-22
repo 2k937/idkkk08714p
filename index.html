@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,273 +8,269 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-```
-:root {
-  --bg:      #0a0a0f;
-  --surface: #12121a;
-  --card:    #171722;
-  --border:  #23232f;
-  --border2: #2f2f3d;
-  --text:    #b5b5c3;
-  --dim:     #6b6b7a;
-  --hi:      #ffffff;
-  --white:   #ffffff;
-  --accent:  #6c7cff;
-  --green:   #22c55e;
-}
+    :root {
+      --bg:      #1a1a2e;
+      --surface: #22223a;
+      --card:    #2a2a45;
+      --border:  #38385a;
+      --border2: #4a4a70;
+      --text:    #c8c8e0;
+      --dim:     #8888aa;
+      --hi:      #ffffff;
+      --white:   #f0f0ff;
+      --accent:  #6c7cff;
+      --green:   #22c55e;
+    }
 
-html { scroll-behavior: smooth; background: #0a0a0f; }
+    html { scroll-behavior: smooth; background: #1a1a2e; }
 
-body {
-  background:
-    radial-gradient(ellipse at 15% 15%, rgba(108,124,255,.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 85%, rgba(34,197,94,.04) 0%, transparent 50%),
-    var(--bg);
-  color: var(--text);
-  font-family: 'Syne', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  line-height: 1.6;
-  padding-bottom: 90px; /* space for bottom nav */
-}
+    body {
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(108,124,255,.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 85%, rgba(34,197,94,.07) 0%, transparent 50%),
+        #1a1a2e;
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      padding-bottom: 90px;
+    }
 
-a { text-decoration: none; color: inherit; }
+    a { text-decoration: none; color: inherit; }
 
-/* ── TOP NAV ── */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(10,10,15,0.88);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(20px);
-}
-.nav-inner {
-  max-width: 800px; margin: 0 auto; padding: 14px 24px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--white); letter-spacing: .5px; }
-.nav-logo em { color: var(--dim); font-style: normal; }
-.nav-right { display: flex; align-items: center; gap: 7px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim); }
-.dot-live { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: livepulse 2s ease-in-out infinite; }
-@keyframes livepulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.5)} 50%{opacity:.5;box-shadow:0 0 0 5px rgba(34,197,94,0)} }
+    /* ── TOP NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26,26,46,0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+    }
+    .nav-inner {
+      max-width: 800px; margin: 0 auto; padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--white); letter-spacing: .5px; }
+    .nav-logo em { color: var(--dim); font-style: normal; }
+    .nav-right { display: flex; align-items: center; gap: 7px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim); }
+    .dot-live { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: livepulse 2s ease-in-out infinite; }
+    @keyframes livepulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.5)} 50%{opacity:.5;box-shadow:0 0 0 5px rgba(34,197,94,0)} }
 
-/* ── BOTTOM TAB BAR ── */
-.tab-bar {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 200;
-  background: rgba(23,23,34,0.85);
-  border: 1px solid var(--border2);
-  border-radius: 22px;
-  padding: 8px 10px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  backdrop-filter: blur(24px);
-  box-shadow: 0 8px 32px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
-}
-.tab-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  padding: 8px 18px;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: all .22s cubic-bezier(.16,1,.3,1);
-  border: none;
-  background: transparent;
-  color: var(--dim);
-  font-family: 'Syne', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  min-width: 60px;
-}
-.tab-item svg { transition: all .22s cubic-bezier(.16,1,.3,1); }
-.tab-item:hover { color: var(--text); background: rgba(255,255,255,.04); }
-.tab-item.active {
-  color: var(--white);
-  background: rgba(108,124,255,.15);
-}
-.tab-item.active svg { color: var(--accent); filter: drop-shadow(0 0 6px rgba(108,124,255,.5)); }
-.tab-label { font-size: 9px; letter-spacing: .5px; text-transform: uppercase; }
+    /* ── BOTTOM TAB BAR ── */
+    .tab-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      background: rgba(42,42,69,0.92);
+      border: 1px solid var(--border2);
+      border-radius: 22px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      padding: 8px 18px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all .22s cubic-bezier(.16,1,.3,1);
+      border: none;
+      background: transparent;
+      color: var(--dim);
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      min-width: 60px;
+    }
+    .tab-item svg { transition: all .22s cubic-bezier(.16,1,.3,1); }
+    .tab-item:hover { color: var(--text); background: rgba(255,255,255,.04); }
+    .tab-item.active {
+      color: var(--white);
+      background: rgba(108,124,255,.15);
+    }
+    .tab-item.active svg { color: var(--accent); filter: drop-shadow(0 0 6px rgba(108,124,255,.5)); }
+    .tab-label { font-size: 9px; letter-spacing: .5px; text-transform: uppercase; }
 
-/* ── WRAP ── */
-.wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    /* ── WRAP ── */
+    .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; }
 
-/* ── PAGES ── */
-.page { display: none; }
-.page.active {
-  display: block;
-  animation: fadeUp .4s cubic-bezier(.16,1,.3,1) forwards;
-}
-@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active {
+      display: block;
+      animation: fadeUp .4s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
 
-/* ── HOME PAGE ── */
-.home-hero { padding: 72px 0 60px; }
-.home-tag {
-  font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim);
-  letter-spacing: 3px; text-transform: uppercase;
-  margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
-}
-.home-tag::before { content: ''; width: 24px; height: 1px; background: var(--border2); }
-.home-name {
-  font-size: clamp(50px, 10vw, 90px);
-  font-weight: 800; line-height: .88; letter-spacing: -4px;
-  color: var(--white);
-  text-shadow: 0 0 40px rgba(255,255,255,.06);
-  margin-bottom: 24px;
-}
-.home-name .fade { color: #252530; }
-.home-sub {
-  font-family: 'DM Mono', monospace; font-size: 13px; color: var(--dim);
-  display: flex; align-items: center; margin-bottom: 44px; min-height: 22px;
-}
-.home-sub::before { content: '// '; color: var(--border2); margin-right: 8px; }
-.caret { display: inline-block; width: 2px; height: 14px; background: var(--accent); margin-left: 3px; animation: blink 1s step-end infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.home-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    /* ── HOME PAGE ── */
+    .home-hero { padding: 72px 0 60px; }
+    .home-tag {
+      font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim);
+      letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+    }
+    .home-tag::before { content: ''; width: 24px; height: 1px; background: var(--border2); }
+    .home-name {
+      font-size: clamp(50px, 10vw, 90px);
+      font-weight: 800; line-height: .88; letter-spacing: -4px;
+      color: var(--white);
+      text-shadow: 0 0 40px rgba(255,255,255,.06);
+      margin-bottom: 24px;
+    }
+    .home-name .fade { color: #3a3a60; }
+    .home-sub {
+      font-family: 'DM Mono', monospace; font-size: 13px; color: var(--dim);
+      display: flex; align-items: center; margin-bottom: 44px; min-height: 22px;
+    }
+    .home-sub::before { content: '// '; color: var(--border2); margin-right: 8px; }
+    .caret { display: inline-block; width: 2px; height: 14px; background: var(--accent); margin-left: 3px; animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .home-btns { display: flex; gap: 10px; flex-wrap: wrap; }
 
-/* stat row */
-.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 56px; border-top: 1px solid var(--border); padding-top: 40px; }
-.stat { text-align: center; }
-.stat-n { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500; color: var(--white); line-height: 1; }
-.stat-l { font-size: 11px; color: var(--dim); margin-top: 5px; letter-spacing: 1px; text-transform: uppercase; }
+    /* stat row */
+    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 56px; border-top: 1px solid var(--border); padding-top: 40px; }
+    .stat { text-align: center; }
+    .stat-n { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500; color: var(--white); line-height: 1; }
+    .stat-l { font-size: 11px; color: var(--dim); margin-top: 5px; letter-spacing: 1px; text-transform: uppercase; }
 
-/* ── SHARED ── */
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 11px 24px; border-radius: 4px;
-  font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-  font-family: 'Syne', sans-serif; cursor: pointer; border: none; transition: all .2s;
-}
-.btn-solid { background: linear-gradient(135deg, var(--accent), #4f5fff); color: #fff; box-shadow: 0 4px 20px rgba(108,124,255,.35); }
-.btn-solid:hover { filter: brightness(1.12); transform: translateY(-1px); }
-.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border2); }
-.btn-ghost:hover { border-color: var(--dim); color: var(--white); }
+    /* ── SHARED ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 24px; border-radius: 4px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      font-family: 'Syne', sans-serif; cursor: pointer; border: none; transition: all .2s;
+    }
+    .btn-solid { background: linear-gradient(135deg, var(--accent), #4f5fff); color: #fff; box-shadow: 0 4px 20px rgba(108,124,255,.35); }
+    .btn-solid:hover { filter: brightness(1.12); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border2); }
+    .btn-ghost:hover { border-color: var(--dim); color: var(--white); }
 
-.sec-eye { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
-.sec-h { font-size: 26px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
-.sec-sub { font-size: 13px; color: var(--dim); margin-bottom: 32px; }
+    .sec-eye { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+    .sec-h { font-size: 26px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+    .sec-sub { font-size: 13px; color: var(--dim); margin-bottom: 32px; }
 
-.page-inner { padding: 48px 0 20px; }
+    .page-inner { padding: 48px 0 20px; }
 
-/* ── ABOUT PAGE ── */
-.dc-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-  overflow: hidden; margin-bottom: 24px;
-  box-shadow: 0 10px 40px rgba(0,0,0,.6);
-  transition: border-color .25s;
-}
-.dc-card:hover { border-color: var(--border2); }
-.dc-banner { height: 68px; background: linear-gradient(135deg, #1a1035 0%, #111827 60%, #0d1b2e 100%); }
-.dc-body { padding: 0 18px 18px; }
-.dc-avatar-row { margin-top: -24px; margin-bottom: 10px; }
-.dc-avatar { width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--bg); background: #1e1e2e; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; color: var(--dim); position: relative; }
-.dc-dot { width: 12px; height: 12px; background: var(--green); border-radius: 50%; border: 2px solid var(--bg); position: absolute; bottom: 1px; right: 1px; }
-.dc-name { font-size: 15px; font-weight: 800; color: var(--white); margin-bottom: 3px; }
-.dc-desc { font-size: 12px; color: var(--dim); margin-bottom: 12px; line-height: 1.6; }
-.dc-meta { display: flex; gap: 16px; margin-bottom: 14px; }
-.dc-stat { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim); display: flex; align-items: center; gap: 5px; }
-.dc-stat strong { color: var(--text); font-weight: 500; }
-.dot-g { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
-.dot-d { width: 7px; height: 7px; border-radius: 50%; background: var(--dim); }
-.dc-join { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--accent); color: #fff; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; font-family: 'Syne', sans-serif; transition: filter .2s; box-shadow: 0 4px 14px rgba(108,124,255,.3); }
-.dc-join:hover { filter: brightness(1.12); }
+    /* ── ABOUT PAGE ── */
+    .dc-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      overflow: hidden; margin-bottom: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.6);
+      transition: border-color .25s;
+    }
+    .dc-card:hover { border-color: var(--border2); }
+    .dc-banner { height: 68px; background: linear-gradient(135deg, #2a1a55 0%, #1a2a4e 60%, #1a2040 100%); }
+    .dc-body { padding: 0 18px 18px; }
+    .dc-avatar-row { margin-top: -24px; margin-bottom: 10px; }
+    .dc-avatar { width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--bg); background: #2a2a50; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; color: var(--dim); position: relative; }
+    .dc-dot { width: 12px; height: 12px; background: var(--green); border-radius: 50%; border: 2px solid var(--bg); position: absolute; bottom: 1px; right: 1px; }
+    .dc-name { font-size: 15px; font-weight: 800; color: var(--white); margin-bottom: 3px; }
+    .dc-desc { font-size: 12px; color: var(--dim); margin-bottom: 12px; line-height: 1.6; }
+    .dc-meta { display: flex; gap: 16px; margin-bottom: 14px; }
+    .dc-stat { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim); display: flex; align-items: center; gap: 5px; }
+    .dc-stat strong { color: var(--text); font-weight: 500; }
+    .dot-g { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    .dot-d { width: 7px; height: 7px; border-radius: 50%; background: var(--dim); }
+    .dc-join { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--accent); color: #fff; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; font-family: 'Syne', sans-serif; transition: filter .2s; box-shadow: 0 4px 14px rgba(108,124,255,.3); }
+    .dc-join:hover { filter: brightness(1.12); }
 
-.roles-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 24px; }
-.role-card { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 6px; font-size: 12px; color: var(--text); transition: all .2s; }
-.role-card:hover { border-color: var(--border2); color: var(--white); transform: translateX(3px); }
-.role-ico { width: 28px; height: 28px; background: var(--surface); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: var(--dim); flex-shrink: 0; }
+    .roles-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 24px; }
+    .role-card { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 6px; font-size: 12px; color: var(--text); transition: all .2s; }
+    .role-card:hover { border-color: var(--border2); color: var(--white); transform: translateX(3px); }
+    .role-ico { width: 28px; height: 28px; background: var(--surface); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: var(--dim); flex-shrink: 0; }
 
-.skills { display: flex; flex-wrap: wrap; gap: 7px; }
-.skill { font-family: 'DM Mono', monospace; font-size: 10px; padding: 4px 11px; border: 1px solid var(--border); border-radius: 3px; color: var(--dim); transition: all .2s; cursor: default; }
-.skill:hover { border-color: var(--accent); color: var(--text); }
+    .skills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .skill { font-family: 'DM Mono', monospace; font-size: 10px; padding: 4px 11px; border: 1px solid var(--border); border-radius: 3px; color: var(--dim); transition: all .2s; cursor: default; }
+    .skill:hover { border-color: var(--accent); color: var(--text); }
 
-/* ── HOME PROFILE ── */
-.home-profile {
-  display: flex; align-items: center; gap: 16px;
-  margin-bottom: 32px;
-}
-.home-avatar-wrap {
-  position: relative; flex-shrink: 0;
-}
-.home-avatar {
-  width: 64px; height: 64px; border-radius: 50%;
-  border: 2px solid var(--border2);
-  object-fit: cover; display: block;
-}
-.home-avatar-fallback {
-  width: 64px; height: 64px; border-radius: 50%;
-  border: 2px solid var(--border2);
-  background: var(--card);
-  display: none; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 18px; color: var(--dim);
-}
-.home-avatar-status {
-  width: 14px; height: 14px; background: var(--green);
-  border-radius: 50%; border: 2px solid var(--bg);
-  position: absolute; bottom: 2px; right: 2px;
-  animation: livepulse 2s ease-in-out infinite;
-}
-.home-socials { display: flex; gap: 8px; }
+    /* ── HOME PROFILE ── */
+    .home-profile {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 32px;
+    }
+    .home-avatar-wrap {
+      position: relative; flex-shrink: 0;
+    }
+    .home-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 2px solid var(--border2);
+      object-fit: cover; display: block;
+    }
+    .home-avatar-fallback {
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 2px solid var(--border2);
+      background: var(--card);
+      display: none; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: var(--dim);
+    }
+    .home-avatar-status {
+      width: 14px; height: 14px; background: var(--green);
+      border-radius: 50%; border: 2px solid var(--bg);
+      position: absolute; bottom: 2px; right: 2px;
+      animation: livepulse 2s ease-in-out infinite;
+    }
+    .home-socials { display: flex; gap: 8px; }
 
-.social-btn {
-  display: flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px;
-  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-  color: var(--dim); transition: all .2s;
-}
-.social-btn:hover { border-color: var(--accent); color: var(--white); background: rgba(108,124,255,.1); transform: translateY(-2px); }
+    .social-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--dim); transition: all .2s;
+    }
+    .social-btn:hover { border-color: var(--accent); color: var(--white); background: rgba(108,124,255,.1); transform: translateY(-2px); }
 
-/* ── BOTS PAGE ── */
-.bots-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 10px; }
-.bot-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; transition: all .25s; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.4); }
-.bot-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0; transition: opacity .25s; }
-.bot-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,.7); }
-.bot-card:hover::before { opacity: 1; }
-.bot-icon { font-size: 22px; margin-bottom: 12px; }
-.bot-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 5px; }
-.bot-desc { font-size: 11px; color: var(--dim); line-height: 1.65; }
-.bot-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
-.bot-chip { font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 7px; background: var(--surface); border: 1px solid var(--border); border-radius: 2px; color: var(--dim); }
-.bot-empty { border-style: dashed; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 150px; cursor: pointer; box-shadow: none; }
-.bot-empty:hover { border-color: var(--accent); transform: none; box-shadow: none; }
+    /* ── BOTS PAGE ── */
+    .bots-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 10px; }
+    .bot-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; transition: all .25s; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.4); }
+    .bot-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0; transition: opacity .25s; }
+    .bot-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,.7); }
+    .bot-card:hover::before { opacity: 1; }
+    .bot-icon { font-size: 22px; margin-bottom: 12px; }
+    .bot-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 5px; }
+    .bot-desc { font-size: 11px; color: var(--dim); line-height: 1.65; }
+    .bot-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
+    .bot-chip { font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 7px; background: var(--surface); border: 1px solid var(--border); border-radius: 2px; color: var(--dim); }
+    .bot-empty { border-style: dashed; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 150px; cursor: pointer; box-shadow: none; }
+    .bot-empty:hover { border-color: var(--accent); transform: none; box-shadow: none; }
 
-/* ── BUY PAGE ── */
-.buy-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; max-width: 460px; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
-.buy-top { padding: 24px; border-bottom: 1px solid var(--border); }
-.buy-title { font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 3px; }
-.buy-by { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--dim); margin-bottom: 20px; }
-.feats { display: flex; flex-direction: column; gap: 10px; list-style: none; }
-.feat { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--text); }
-.feat-ok { color: var(--green); flex-shrink: 0; }
-.buy-btm { padding: 24px; }
-.price-block { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 20px; text-align: center; margin-bottom: 14px; }
-.price-lbl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--dim); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
-.price-num { font-family: 'DM Mono', monospace; font-size: 42px; font-weight: 500; color: var(--white); line-height: 1; }
-.price-unit { font-size: 11px; color: var(--dim); margin-top: 5px; }
-.trust { display: flex; justify-content: center; gap: 18px; margin-top: 14px; flex-wrap: wrap; }
-.trust span { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--border2); }
-.trust span::before { content: '✓ '; }
+    /* ── BUY PAGE ── */
+    .buy-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; max-width: 460px; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+    .buy-top { padding: 24px; border-bottom: 1px solid var(--border); }
+    .buy-title { font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 3px; }
+    .buy-by { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--dim); margin-bottom: 20px; }
+    .feats { display: flex; flex-direction: column; gap: 10px; list-style: none; }
+    .feat { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--text); }
+    .feat-ok { color: var(--green); flex-shrink: 0; }
+    .buy-btm { padding: 24px; }
+    .price-block { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 20px; text-align: center; margin-bottom: 14px; }
+    .price-lbl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--dim); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+    .price-num { font-family: 'DM Mono', monospace; font-size: 42px; font-weight: 500; color: var(--white); line-height: 1; }
+    .price-unit { font-size: 11px; color: var(--dim); margin-top: 5px; }
+    .trust { display: flex; justify-content: center; gap: 18px; margin-top: 14px; flex-wrap: wrap; }
+    .trust span { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--border2); }
+    .trust span::before { content: '✓ '; }
 
-@media(max-width:560px){
-  .roles-grid { grid-template-columns: 1fr; }
-  .home-hero { padding: 52px 0 44px; }
-  .home-name { letter-spacing: -2px; }
-  .stats-row { grid-template-columns: repeat(3,1fr); gap: 8px; }
-  .tab-item { padding: 8px 14px; min-width: 50px; }
-}
-```
-
+    @media(max-width:560px){
+      .roles-grid { grid-template-columns: 1fr; }
+      .home-hero { padding: 52px 0 44px; }
+      .home-name { letter-spacing: -2px; }
+      .stats-row { grid-template-columns: repeat(3,1fr); gap: 8px; }
+      .tab-item { padding: 8px 14px; min-width: 50px; }
+    }
   </style>
 </head>
 <body>
 
 <!-- TOP NAV -->
-
 <nav>
   <div class="nav-inner">
     <div class="nav-logo">idkkk<em>08714p</em></div>
@@ -289,106 +284,97 @@ nav {
 <div class="wrap">
 
   <!-- HOME PAGE -->
-
   <div id="page-home" class="page active">
     <div class="home-hero">
 
-```
-  <!-- Avatar + socials row -->
-  <div class="home-profile">
-    <div class="home-avatar-wrap">
-      <img
-        src="https://cdn.discordapp.com/attachments/1432895054287995005/1485079625645297804/IMG_1148.webp?ex=69c08fae&is=69bf3e2e&hm=8f5270fe8bf97a41ae251faef307f94edf595960c19c2a0c413f73588997d2b2&"
-        class="home-avatar"
-        alt="avatar"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-      />
-      <div class="home-avatar-fallback">id</div>
-      <div class="home-avatar-status"></div>
+      <!-- Avatar + socials row -->
+      <div class="home-profile">
+        <div class="home-avatar-wrap">
+          <img
+            src="https://cdn.discordapp.com/attachments/1432895054287995005/1485079625645297804/IMG_1148.webp?ex=69c08fae&is=69bf3e2e&hm=8f5270fe8bf97a41ae251faef307f94edf595960c19c2a0c413f73588997d2b2&"
+            class="home-avatar"
+            alt="avatar"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          />
+          <div class="home-avatar-fallback">id</div>
+          <div class="home-avatar-status"></div>
+        </div>
+        <div class="home-socials">
+          <a href="https://github.com/2k937" target="_blank" class="social-btn" title="GitHub">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          </a>
+          <a href="https://discord.gg/qqwQ9qgQ" target="_blank" class="social-btn" title="Discord">
+            <svg width="17" height="17" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15zM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69z"/></svg>
+          </a>
+          <a href="https://www.roblox.com/users/525015492/profile" target="_blank" class="social-btn" title="Roblox">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5.165 2L2 18.835 18.835 22 22 5.165zM15.4 14.15l-4.55-1.22 1.22-4.55 4.55 1.22z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="home-tag">Web Developer + Bot Developer · USA</div>
+      <div class="home-name">idkkk<span class="fade">08714p</span></div>
+      <div class="home-sub"><span id="typed"></span><span class="caret"></span></div>
+      <div class="home-btns">
+        <a href="#" class="btn btn-solid" onclick="goTab('buy');return false;">Buy a Bot →</a>
+        <a href="#" class="btn btn-ghost" onclick="goTab('bots');return false;">Portfolio</a>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">91</div><div class="stat-l">Members</div></div>
+        <div class="stat"><div class="stat-n">5+</div><div class="stat-l">Bots built</div></div>
+        <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Uptime</div></div>
+      </div>
     </div>
-    <div class="home-socials">
-      <a href="https://github.com/2k937" target="_blank" class="social-btn" title="GitHub">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-      </a>
-      <a href="https://discord.gg/qqwQ9qgQ" target="_blank" class="social-btn" title="Discord">
-        <svg width="17" height="17" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15zM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69z"/></svg>
-      </a>
-      <a href="https://www.roblox.com/users/525015492/profile" target="_blank" class="social-btn" title="Roblox">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M5.165 2L2 18.835 18.835 22 22 5.165zM15.4 14.15l-4.55-1.22 1.22-4.55 4.55 1.22z"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-
-  <div class="home-tag">Web Developer + Bot Developer · USA</div>
-  <div class="home-name">idkkk<span class="fade">08714p</span></div>
-  <div class="home-sub"><span id="typed"></span><span class="caret"></span></div>
-  <div class="home-btns">
-    <a href="#" class="btn btn-solid" onclick="goTab('buy');return false;">Buy a Bot →</a>
-    <a href="#" class="btn btn-ghost" onclick="goTab('bots');return false;">Portfolio</a>
-  </div>
-
-  <div class="stats-row">
-    <div class="stat"><div class="stat-n">91</div><div class="stat-l">Members</div></div>
-    <div class="stat"><div class="stat-n">5+</div><div class="stat-l">Bots built</div></div>
-    <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Uptime</div></div>
-  </div>
-</div>
-```
-
   </div>
 
   <!-- ABOUT PAGE -->
-
   <div id="page-about" class="page">
     <div class="page-inner">
       <div class="sec-eye">// profile</div>
       <div class="sec-h">About me</div>
       <div class="sec-sub">Web dev + bot dev. I build for the web and for Discord.</div>
 
-```
-  <div class="dc-card">
-    <div class="dc-banner"></div>
-    <div class="dc-body">
-      <div class="dc-avatar-row">
-        <div class="dc-avatar">N<div class="dc-dot"></div></div>
+      <div class="dc-card">
+        <div class="dc-banner"></div>
+        <div class="dc-body">
+          <div class="dc-avatar-row">
+            <div class="dc-avatar">N<div class="dc-dot"></div></div>
+          </div>
+          <div class="dc-name">Node</div>
+          <div class="dc-desc">A Discord server where I serve as the web developer. 91 members.</div>
+          <div class="dc-meta">
+            <div class="dc-stat"><div class="dot-g"></div><strong>online</strong></div>
+            <div class="dc-stat"><div class="dot-d"></div><strong>91</strong>&nbsp;members</div>
+          </div>
+          <a class="dc-join" href="https://discord.gg/F57YEF3z7F" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15zM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69z"/></svg>
+            Join — discord.gg/F57YEF3z7F
+          </a>
+        </div>
       </div>
-      <div class="dc-name">Node</div>
-      <div class="dc-desc">A Discord server where I serve as the web developer. 91 members.</div>
-      <div class="dc-meta">
-        <div class="dc-stat"><div class="dot-g"></div><strong>online</strong></div>
-        <div class="dc-stat"><div class="dot-d"></div><strong>91</strong>&nbsp;members</div>
+
+      <div class="roles-grid">
+        <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="5 3 1 8 5 13"/><polyline points="11 3 15 8 11 13"/></svg></div>Web Developer</div>
+        <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2v4M8 10v4M2 8h4M10 8h4"/><circle cx="8" cy="8" r="2"/></svg></div>Bot Developer</div>
+        <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg></div>Management</div>
+        <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="5" r="2.5"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5"/></svg></div>Administration</div>
+        <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h12M2 8h8M2 12h5"/></svg></div>Staff Lead</div>
+        <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M5 7h6M5 10h4"/></svg></div>UI Design</div>
       </div>
-      <a class="dc-join" href="https://discord.gg/F57YEF3z7F" target="_blank">
-        <svg width="13" height="13" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15zM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69z"/></svg>
-        Join — discord.gg/F57YEF3z7F
-      </a>
+
+      <div class="skills">
+        <span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span>
+        <span class="skill">Node.js</span><span class="skill">discord.js</span><span class="skill">Python</span>
+        <span class="skill">discord.py</span><span class="skill">MongoDB</span><span class="skill">REST APIs</span>
+        <span class="skill">Slash Commands</span><span class="skill">Webhooks</span>
+      </div>
     </div>
   </div>
 
-  <div class="roles-grid">
-    <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="5 3 1 8 5 13"/><polyline points="11 3 15 8 11 13"/></svg></div>Web Developer</div>
-    <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2v4M8 10v4M2 8h4M10 8h4"/><circle cx="8" cy="8" r="2"/></svg></div>Bot Developer</div>
-    <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg></div>Management</div>
-    <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="5" r="2.5"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5"/></svg></div>Administration</div>
-    <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h12M2 8h8M2 12h5"/></svg></div>Staff Lead</div>
-    <div class="role-card"><div class="role-ico"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M5 7h6M5 10h4"/></svg></div>UI Design</div>
-  </div>
-
-  <div class="skills">
-    <span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span>
-    <span class="skill">Node.js</span><span class="skill">discord.js</span><span class="skill">Python</span>
-    <span class="skill">discord.py</span><span class="skill">MongoDB</span><span class="skill">REST APIs</span>
-    <span class="skill">Slash Commands</span><span class="skill">Webhooks</span>
-  </div>
-</div>
-```
-
-  </div>
-
   <!-- BOTS PAGE -->
-
   <div id="page-bots" class="page">
     <div class="page-inner">
       <div class="sec-eye">// portfolio</div>
@@ -435,7 +421,6 @@ nav {
   </div>
 
   <!-- BUY PAGE -->
-
   <div id="page-buy" class="page">
     <div class="page-inner">
       <div class="sec-eye">// order</div>
@@ -476,7 +461,6 @@ nav {
 </div>
 
 <!-- BOTTOM TAB BAR -->
-
 <div class="tab-bar">
   <!-- Home -->
   <button class="tab-item active" onclick="goTab('home')" id="tab-home">
@@ -488,7 +472,6 @@ nav {
   </button>
 
   <!-- About -->
-
   <button class="tab-item" onclick="goTab('about')" id="tab-about">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="8" r="4"/>
@@ -498,7 +481,6 @@ nav {
   </button>
 
   <!-- Bots -->
-
   <button class="tab-item" onclick="goTab('bots')" id="tab-bots">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <rect x="3" y="11" width="18" height="10" rx="2"/>
@@ -510,7 +492,6 @@ nav {
   </button>
 
   <!-- Buy -->
-
   <button class="tab-item" onclick="goTab('buy')" id="tab-buy">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -561,6 +542,5 @@ nav {
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
 </script>
-
 </body>
 </html>
