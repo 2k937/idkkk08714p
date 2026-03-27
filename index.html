@@ -234,7 +234,42 @@
     .bot-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0; transition: opacity .25s; }
     .bot-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,.7); }
     .bot-card:hover::before { opacity: 1; }
-    .bot-icon { font-size: 22px; margin-bottom: 12px; }
+
+    /* ── NEON SVG ICON ── */
+    .bot-icon-wrap {
+      width: 44px; height: 44px;
+      margin-bottom: 14px;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bot-icon-wrap svg {
+      width: 44px; height: 44px;
+      transition: filter .3s, transform .3s;
+    }
+    .bot-card:hover .bot-icon-wrap svg {
+      transform: scale(1.08);
+    }
+
+    /* Guardian – blue/violet */
+    .icon-guardian svg { filter: drop-shadow(0 0 6px rgba(108,124,255,.8)) drop-shadow(0 0 14px rgba(108,124,255,.4)); }
+    .bot-card:hover .icon-guardian svg { filter: drop-shadow(0 0 10px rgba(108,124,255,1)) drop-shadow(0 0 24px rgba(108,124,255,.6)); }
+
+    /* Eco – green */
+    .icon-eco svg { filter: drop-shadow(0 0 6px rgba(34,197,94,.8)) drop-shadow(0 0 14px rgba(34,197,94,.4)); }
+    .bot-card:hover .icon-eco svg { filter: drop-shadow(0 0 10px rgba(34,197,94,1)) drop-shadow(0 0 24px rgba(34,197,94,.6)); }
+
+    /* LevelUp – gold/amber */
+    .icon-level svg { filter: drop-shadow(0 0 6px rgba(251,191,36,.8)) drop-shadow(0 0 14px rgba(251,191,36,.4)); }
+    .bot-card:hover .icon-level svg { filter: drop-shadow(0 0 10px rgba(251,191,36,1)) drop-shadow(0 0 24px rgba(251,191,36,.6)); }
+
+    /* StaffBot – cyan */
+    .icon-staff svg { filter: drop-shadow(0 0 6px rgba(34,211,238,.8)) drop-shadow(0 0 14px rgba(34,211,238,.4)); }
+    .bot-card:hover .icon-staff svg { filter: drop-shadow(0 0 10px rgba(34,211,238,1)) drop-shadow(0 0 24px rgba(34,211,238,.6)); }
+
+    /* ArcadeBot – pink/magenta */
+    .icon-arcade svg { filter: drop-shadow(0 0 6px rgba(232,72,229,.8)) drop-shadow(0 0 14px rgba(232,72,229,.4)); }
+    .bot-card:hover .icon-arcade svg { filter: drop-shadow(0 0 10px rgba(232,72,229,1)) drop-shadow(0 0 24px rgba(232,72,229,.6)); }
+
     .bot-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 5px; }
     .bot-desc { font-size: 11px; color: var(--dim); line-height: 1.65; }
     .bot-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
@@ -287,7 +322,6 @@
   <div id="page-home" class="page active">
     <div class="home-hero">
 
-      <!-- Avatar + socials row -->
       <div class="home-profile">
         <div class="home-avatar-wrap">
           <img
@@ -381,41 +415,151 @@
       <div class="sec-h">Bots I've built</div>
       <div class="sec-sub">Custom bots deployed in real servers — tested and battle-hardened.</div>
       <div class="bots-grid">
+
+        <!-- Guardian -->
         <div class="bot-card">
-          <div class="bot-icon">🛡️</div>
+          <div class="bot-icon-wrap icon-guardian">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-shield" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#a0aaff"/>
+                  <stop offset="100%" stop-color="#6c7cff"/>
+                </linearGradient>
+              </defs>
+              <!-- Shield body -->
+              <path d="M22 5L8 11v10c0 8.2 5.8 15.9 14 18 8.2-2.1 14-9.8 14-18V11L22 5z"
+                fill="url(#g-shield)" fill-opacity="0.15"
+                stroke="url(#g-shield)" stroke-width="1.6" stroke-linejoin="round"/>
+              <!-- Checkmark -->
+              <polyline points="15,22 20,27 29,17"
+                stroke="#a0aaff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <!-- Top shine -->
+              <path d="M14 12.5L22 9l8 3.5" stroke="#c8ccff" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </div>
           <div class="bot-name">Guardian</div>
           <div class="bot-desc">Full mod suite — auto-mod, logging, anti-raid, warn systems.</div>
           <div class="bot-chips"><span class="bot-chip">moderation</span><span class="bot-chip">anti-raid</span></div>
         </div>
+
+        <!-- EcoBot -->
         <div class="bot-card">
-          <div class="bot-icon">💰</div>
+          <div class="bot-icon-wrap icon-eco">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-eco" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#6effa0"/>
+                  <stop offset="100%" stop-color="#22c55e"/>
+                </linearGradient>
+              </defs>
+              <!-- Coin outer ring -->
+              <circle cx="22" cy="22" r="14" stroke="url(#g-eco)" stroke-width="1.8" fill="rgba(34,197,94,0.1)"/>
+              <!-- Coin inner ring -->
+              <circle cx="22" cy="22" r="10" stroke="#22c55e" stroke-width="0.8" stroke-dasharray="2 2" fill="none" opacity="0.5"/>
+              <!-- Dollar sign -->
+              <text x="22" y="27" text-anchor="middle" font-size="14" font-weight="700"
+                fill="url(#g-eco)" font-family="monospace">$</text>
+              <!-- Shine arc -->
+              <path d="M12 16 Q22 8 32 16" stroke="#6effa0" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.4"/>
+            </svg>
+          </div>
           <div class="bot-name">EcoBot</div>
           <div class="bot-desc">Economy with currency, shop, daily rewards, rob, leaderboards.</div>
           <div class="bot-chips"><span class="bot-chip">economy</span><span class="bot-chip">gamification</span></div>
         </div>
+
+        <!-- LevelUp -->
         <div class="bot-card">
-          <div class="bot-icon">⭐</div>
+          <div class="bot-icon-wrap icon-level">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-star" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#ffe980"/>
+                  <stop offset="100%" stop-color="#fbbf24"/>
+                </linearGradient>
+              </defs>
+              <!-- Star shape -->
+              <polygon
+                points="22,5 26.5,16.5 39,16.5 29,24 32.5,36 22,29 11.5,36 15,24 5,16.5 17.5,16.5"
+                fill="rgba(251,191,36,0.12)" stroke="url(#g-star)" stroke-width="1.6" stroke-linejoin="round"/>
+              <!-- Inner star glow -->
+              <polygon
+                points="22,11 25,19 33.5,19 26.8,24 29.2,32 22,27.2 14.8,32 17.2,24 10.5,19 19,19"
+                fill="rgba(251,191,36,0.08)" stroke="#ffe980" stroke-width="0.6" stroke-linejoin="round" opacity="0.5"/>
+              <!-- Center dot -->
+              <circle cx="22" cy="22" r="2.5" fill="url(#g-star)"/>
+            </svg>
+          </div>
           <div class="bot-name">LevelUp</div>
           <div class="bot-desc">XP leveling with rank cards, role rewards, and voice XP.</div>
           <div class="bot-chips"><span class="bot-chip">leveling</span><span class="bot-chip">roles</span></div>
         </div>
+
+        <!-- StaffBot -->
         <div class="bot-card">
-          <div class="bot-icon">📋</div>
+          <div class="bot-icon-wrap icon-staff">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-staff" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#a5f3ff"/>
+                  <stop offset="100%" stop-color="#22d3ee"/>
+                </linearGradient>
+              </defs>
+              <!-- Clipboard board -->
+              <rect x="10" y="12" width="24" height="24" rx="2.5"
+                fill="rgba(34,211,238,0.1)" stroke="url(#g-staff)" stroke-width="1.6"/>
+              <!-- Clip tab -->
+              <rect x="16" y="9" width="12" height="6" rx="2"
+                fill="rgba(34,211,238,0.15)" stroke="#22d3ee" stroke-width="1.4"/>
+              <!-- Lines -->
+              <line x1="15" y1="21" x2="29" y2="21" stroke="#a5f3ff" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="15" y1="26" x2="26" y2="26" stroke="#22d3ee" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+              <line x1="15" y1="31" x2="23" y2="31" stroke="#22d3ee" stroke-width="1.4" stroke-linecap="round" opacity="0.4"/>
+            </svg>
+          </div>
           <div class="bot-name">StaffBot</div>
           <div class="bot-desc">Staff management, ticket systems, applications, shift tracking.</div>
           <div class="bot-chips"><span class="bot-chip">management</span><span class="bot-chip">tickets</span></div>
         </div>
+
+        <!-- ArcadeBot -->
         <div class="bot-card">
-          <div class="bot-icon">🎮</div>
+          <div class="bot-icon-wrap icon-arcade">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g-arcade" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#f9a8ff"/>
+                  <stop offset="100%" stop-color="#e848e5"/>
+                </linearGradient>
+              </defs>
+              <!-- Controller body -->
+              <rect x="7" y="15" width="30" height="18" rx="9"
+                fill="rgba(232,72,229,0.12)" stroke="url(#g-arcade)" stroke-width="1.6"/>
+              <!-- D-pad left arm -->
+              <rect x="12" y="20" width="6" height="2.5" rx="1" fill="#f9a8ff"/>
+              <!-- D-pad up arm -->
+              <rect x="14" y="18" width="2.5" height="6" rx="1" fill="#f9a8ff"/>
+              <!-- Buttons -->
+              <circle cx="29" cy="21" r="2" fill="rgba(232,72,229,0.25)" stroke="#e848e5" stroke-width="1.2"/>
+              <circle cx="33" cy="24" r="2" fill="rgba(232,72,229,0.25)" stroke="#f9a8ff" stroke-width="1.2"/>
+              <!-- Center select/start -->
+              <rect x="20" y="22" width="4" height="2" rx="1" fill="#e848e5" opacity="0.5"/>
+              <!-- Top shine -->
+              <path d="M13 16.5 Q22 13 31 16.5" stroke="#f9a8ff" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+            </svg>
+          </div>
           <div class="bot-name">ArcadeBot</div>
           <div class="bot-desc">Mini games, trivia, tournaments and events for engagement.</div>
           <div class="bot-chips"><span class="bot-chip">games</span><span class="bot-chip">events</span></div>
         </div>
+
+        <!-- Your bot (empty) -->
         <div class="bot-card bot-empty" onclick="goTab('buy')">
           <div style="font-size:24px;opacity:.15;margin-bottom:8px">+</div>
           <div class="bot-name" style="color:var(--border2)">Your bot</div>
           <div class="bot-desc" style="margin-top:4px;color:var(--border2)">click to order →</div>
         </div>
+
       </div>
     </div>
   </div>
@@ -462,7 +606,6 @@
 
 <!-- BOTTOM TAB BAR -->
 <div class="tab-bar">
-  <!-- Home -->
   <button class="tab-item active" onclick="goTab('home')" id="tab-home">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
@@ -470,8 +613,6 @@
     </svg>
     <span class="tab-label">Home</span>
   </button>
-
-  <!-- About -->
   <button class="tab-item" onclick="goTab('about')" id="tab-about">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="8" r="4"/>
@@ -479,8 +620,6 @@
     </svg>
     <span class="tab-label">About</span>
   </button>
-
-  <!-- Bots -->
   <button class="tab-item" onclick="goTab('bots')" id="tab-bots">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <rect x="3" y="11" width="18" height="10" rx="2"/>
@@ -490,8 +629,6 @@
     </svg>
     <span class="tab-label">Bots</span>
   </button>
-
-  <!-- Buy -->
   <button class="tab-item" onclick="goTab('buy')" id="tab-buy">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -503,14 +640,12 @@
 </div>
 
 <script>
-  // Clock
   function tick(){
     const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit',hour12:true});
     document.getElementById('clock').textContent=t+' CST';
   }
   tick(); setInterval(tick,1000);
 
-  // Typing
   const lines=['Web Developer','Bot Developer','Server Staff','Writing clean code','Building Discord bots','Crafting modern UIs','JavaScript enjoyer','Full stack thinker','Building since day one','Open for commissions'];
   let li=0,ci=0,del=false;
   const typed=document.getElementById('typed');
@@ -528,17 +663,11 @@
   }
   type();
 
-  // Tab navigation
   function goTab(name) {
-    // hide all pages
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    // deactivate all tabs
     document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-    // show target page
     document.getElementById('page-' + name).classList.add('active');
-    // activate tab button
     document.getElementById('tab-' + name).classList.add('active');
-    // scroll to top
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
 </script>
